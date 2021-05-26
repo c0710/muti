@@ -1,0 +1,291 @@
+@charset "utf-8";
+
+// 变量存储
+$pcFont: '\5FAE\8F6F\96C5\9ED1', '\5B8B\4F53', arial;
+$defaultColor: #333;
+$mobileFont: 'Helvetica Neue', Helvetica, STHeiTi, Microsoft YaHei, sans-serif, Microsoft JhengHei, Arial;
+$browser: null;
+
+//颜色
+$white: #fff;
+$red: #e23a3a;
+$blue: #547bca;
+$black: #000;
+$darkGrey: #333;
+$lightGrey: #666;
+$lighterGrey: #999;
+$lineColor: #d9d9d9;
+
+//按钮
+
+
+//文本
+$textCenter: center;
+$textleft: left;
+$textRight: right;
+
+/*字号*/
+$normalSize: .12rem;
+$txtSize: .14rem;
+$bigSize: .16rem;
+$biggerSize: .18rem;
+
+/*浮动*/
+$floatLeft: left;
+$floatRight: right;
+$floatNone: none;
+
+
+%display {
+  display:inline-block;
+  *display:inline;
+  *zoom:1;
+}
+%text-indent {
+  font-size:0;
+  text-indent:-99999em;
+  overflow:hidden;
+}
+%box-sizing {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+}
+%o-hidden{
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+}
+%wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+%background {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+// 绝对居中
+@mixin center($width, $height) {
+  position: absolute;
+  left:50%;
+  top:50%;
+  width:$width;
+  height:$height;
+  margin:(-$height / 2) 0 0 (-$width / 2);
+}
+// 自适应居中
+%flex-center{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+// 圆角
+@mixin radius($width) {
+  border-radius: $width;
+}
+// 间距
+@mixin margin($size1,$size2,$size3,$size4) {
+  margin: $size1 $size2 $size3 $size4;
+}
+@mixin padding($size1,$size2,$size3,$size4) {
+  padding: $size1 $size2 $size3 $size4;
+}
+// 设置动画名称
+@mixin animation($aniName) {
+  -webkit-animation:$aniName;
+  -moz-animation:$aniName;
+  -o-animation:$aniName;
+  animation:$aniName;
+}
+// 设置延迟执行时间
+@mixin animation-delay($time) {
+  -webkit-animation-delay:$time;
+  -moz-animation-delay:$time;
+  -o-animation-delay:$time;
+  animation-delay:$time;
+}
+// 设置阴影
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow:$shadow;
+  -moz-box-shadow:$shadow;
+  -o-box-shadow:$shadow;
+  box-shadow:$shadow;
+}
+// 圆角
+@mixin border-radius($radius) {
+  -webkit-border-radius:$radius;
+  -moz-border-radius:$radius;
+  -o-border-radius:$radius;
+  border-radius:$radius;
+}
+// 设置过渡
+@mixin transition($transition...) {
+  -webkit-transition:$transition;
+  -moz-transition:$transition;
+  -o-transition:$transition;
+  transition:$transition;
+}
+// 设置旋转位置
+@mixin transform-origin($origin...) {
+  -webkit-transform-origin:$origin;
+  -moz-transform-origin:$origin;
+  -o-transform-origin:$origin;
+  transform-origin:$origin;
+}
+@mixin transform($transform...) {
+  -webkit-transform:$transform;
+  -moz-transform:$transform;
+  -o-transform:$transform;
+  transform:$transform;
+}
+
+// 设置关键帧
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    $browser: '-webkit-'; @content;
+  }
+  @-moz-keyframes #{$name} {
+    $browser: '-moz-'; @content;
+  }
+  @-o-keyframes #{$name} {
+    $browser: '-o-'; @content;
+  }
+  @keyframes #{$name} {
+    $browser: ''; @content;
+  }
+}
+//超出宽度省略
+@mixin ell() {
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: keep-all;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+%cut{
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* 箭头 arrow(direction,size,color);*/
+@mixin arrow($direction,$size,$color) {
+  width: 0;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  border-width: $size;
+  vertical-align: middle;
+  display: inline-block;
+  @if $direction == top {
+    border-style: solid;
+    border-color: transparent transparent $color transparent;
+  }
+  @else if $direction == bottom {
+    border-style: solid;
+    border-color: $color transparent transparent transparent;
+  }
+  @else if $direction == right {
+    border-style: solid;
+    border-color: transparent transparent transparent $color;
+  }
+  @else if $direction == left {
+    border-style: solid;
+    border-color: transparent $color transparent transparent;
+  }
+}
+@mixin box-shadow($size1,$size2,$size3,$color){
+  -moz-box-shadow: $size1 $size2 $size3 $color;
+  -webkit-box-shadow: $size1 $size2 $size3 $color;
+  box-shadow: $size1 $size2 $size3 $color;
+}
+//0.5px -across
+@mixin thin-line($direction,$color){
+  &:before{
+    position: absolute;
+    z-index:2;
+    content: "";
+    @if $direction == top {
+      width: 100%;
+      height: 1px;
+      top: 0;
+      left: 0;
+      border-top: 1px solid $color;
+      -webkit-transform: scaleY(.5);
+      transform: scaleY(.5);
+    }
+    @else if $direction == bottom {
+      width: 100%;
+      height: 1px;
+      bottom: -1px;
+      left: 0;
+      border-top: 1px solid $color;
+      -webkit-transform: scaleY(.5);
+      transform: scaleY(.5);
+    }
+    @else if $direction == left {
+      width: 1px;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-left: 1px solid $color;
+      -webkit-transform: scaleX(.5);
+      transform: scaleX(.5);
+    }
+    @else if $direction == right {
+      width: 1px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      border-right: 1px solid $color;
+      -webkit-transform: scaleX(.5);
+      transform: scaleX(.5);
+    }
+  }
+}
+/* clearfix */
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+  }
+  *height: 1%;
+}
+.clearfix {
+  @include clearfix;
+}
+
+//扩大可点击区域
+@mixin extendClick() {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        bottom: -10px;
+        left: -10px;
+        right: -10px;
+    }
+}

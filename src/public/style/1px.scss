@@ -1,0 +1,116 @@
+@mixin setLine($c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  border: 1PX solid $c;// ignored
+  color: $c;
+  height: 200%;
+  transform-origin: left top;
+  transform: scale3d(0.5,0.5,1);
+}
+
+@mixin setTopLine($c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1PX;// ignored
+  border-top: 1PX solid $c;// ignored
+  color: $c;
+  transform-origin: 0 0;
+  transform: scaleY(0.5);
+}
+
+@mixin setBottomLine($c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1PX;// ignored
+  border-bottom: 1PX solid $c;// ignored
+  color: $c;
+  transform-origin: 0 100%;
+  transform: scaleY(0.5);
+}
+
+@mixin setLeftLine($c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1PX;// ignored
+  bottom: 0;
+  border-left: 1PX solid $c;// ignored
+  color: $c;
+  transform-origin: 0 0;
+  transform: scaleX(0.5);
+}
+
+@mixin setRightLine($c: #C7C7C7) {
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1PX;// ignored
+  bottom: 0;
+  border-right: 1PX solid $c;// ignored
+  color: $c;
+  transform-origin: 100% 0;
+  transform: scaleX(0.5);
+}
+
+
+@mixin q-1px ($c) {
+  position: relative;
+
+  &:before {
+    @include setLine($c);
+  }
+}
+
+@mixin q-1px-t ($c) {
+  position: relative;
+
+  &:before {
+    @include setTopLine($c);
+  }
+}
+
+@mixin q-1px-b ($c) {
+  position: relative;
+
+  &:after {
+    @include setBottomLine($c);
+  }
+}
+
+@mixin q-1px-tb ($c) {
+  position: relative;
+
+  &:before {
+    @include setTopLine($c);
+  }
+  &:after {
+    @include setBottomLine($c);
+  }
+}
+
+@mixin q-1px-l ($c) {
+  position: relative;
+
+  &:after {
+    @include setLeftLine($c);
+  }
+}
+
+@mixin q-1px-r ($c) {
+  position: relative;
+
+  &:before {
+    @include setRightLine($c);
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+    <!-- <meta content="width=640, user-scalable=no, target-densitydpi=device-dpi" name="viewport"> -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta http-equiv="expires" content="0">
+
+    <!--适用于 Retina 屏的 iPad-->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/logo_144.png">
+    <!--适用于 Retina 屏的 iPhone-->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/images/logo_120.png">
+    <!--适用于非 Retina 屏的 iPad-->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/logo_72.png">
+    <!--适用于非 Retina 屏的 iPhone-->
+    <link rel="apple-touch-icon-precomposed" href="/images/logo_72.png">
+    <title></title>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but our App doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong>
+</noscript>
+<div id="app"></div>
+<div id="portal-target"></div>
+
+
+<% _.forEach(htmlWebpackPlugin.options.externalJs,function(js){ %>
+<script src="<%= js %>"></script>
+<% }) %>
+
+<% if(String(VUE_APP_DEBUG) === 'true'){ %>
+<script src="//cdn.bootcss.com/eruda/1.5.8/eruda.min.js"></script>
+<script type="text/javascript">
+    // eruda.init();
+    (function () {
+        var count = 0;
+        var timer = null;
+        document.body.addEventListener('click',function () {
+            count++;
+            if(count === 4){
+                eruda.init();
+            }
+            clearTimeout(timer);
+            timer = setTimeout(()=>{
+                count = 0;
+            },500)
+        });
+    })()
+</script>
+<% } %>
+<!-- built files will be auto injected -->
+</body>
+</html>
